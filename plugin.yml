@@ -1,0 +1,10 @@
+name: IgnorePlayer
+main: Rushil13579\IgnorePlayer\Main
+author: Rushil13579
+api: 3.0.0
+version: 1.0.0
+
+commands:
+  ignore:
+    description: 'Master command for IgnorePlayer'
+    aliases: [ig]
