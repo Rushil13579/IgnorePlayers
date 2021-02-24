@@ -5,4 +5,5 @@ branches:
 projects:
   IgnorePlayers:
     path: ""
+    icon: image.png
 ...
