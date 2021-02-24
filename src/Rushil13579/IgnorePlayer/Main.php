@@ -9,7 +9,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\command\{Command, CommandSender};
 
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerChatEvent;
+use pocketmine\event\player\{PlayerJoinEvent, PlayerChatEvent};
 
 use pocketmine\utils\Config;
 
@@ -23,6 +23,14 @@ class Main extends PluginBase implements Listener {
     $this->list = new Config($this->getDataFolder() . "Ignorelist.yml", Config::YAML);
   }
 
+  public function onJoin(PlayerJoinEvent $e){
+    $player = $e->getPlayer();
+    if(!$this->list->exists($player->getName())){
+      $this->list->set($player->getName(), []);
+      $this->list->save();
+    }
+  }
+
   /**
   *@priority HIGEHST
   **/
@@ -34,17 +42,17 @@ class Main extends PluginBase implements Listener {
       return null;
     }
 
+    $rec = array();
     foreach($this->getServer()->getOnlinePlayers() as $pl){
-      if(!empty($this->list->get($pl->getName()))){
-        if(!in_array($player->getName(), $this->list->get($pl->getName()))){
-          $e->setCancelled();
-          $var[$pl->getName()] = $pl;
-        }
+      if(empty($this->list->get($pl->getName()))){
+        $rec[] = $pl;
       } else {
-        $var[$pl->getName()] = $pl;
+        if(!in_array($player->getName(), $this->list->get($pl->getName()))){
+          $rec[] = $pl;
+        }
       }
     }
-    $e->setRecipients($var);
+    $e->setRecipients($rec);
   }
 
   public function onCommand(CommandSender $s, Command $cmd, String $label, Array $args) : bool {
@@ -63,17 +71,22 @@ class Main extends PluginBase implements Listener {
 
       switch(strtolower($args[0])){
         case 'help':
-          $s->sendMessage("§3=== §bIgnorePlayer §3===\n§c/ignore help: §7Get info regarding IgnorePlayer\n§c/ignore list: §7Get a list of all ignored players\n§c/ignore add [player]: §7Start ignoring a player\n§c/ignore remove [player]: §7Stop ignoring a player");
+          $s->sendMessage("§3=== §bIgnorePlayer §3===\n§c/ignore help: §7Get information regarding IgnorePlayer\n§c/ignore list: §7Get a list of all ignored players\n§c/ignore add [player]: §7Add a player to the ignored list\n§c/ignore remove [player]: §7Remove a player from the ignored list");
         break;
 
         case 'list':
-          $names = '';
-          if(!empty($this->list->get($s->getName()))){
-            foreach(array_keys($this->list->get($s->getName())) as $key){
-              $name = $this->list->get($s->getName()[$key]);
-              $names .= $name . ', ';
-            }
+          $names = "";
+          if(empty($this->list->get($s->getName()))){
+            $s->sendMessage("§3IgnoredPlayers: §7$names");
+            return false;
           }
+
+          $list = $this->list->get($s->getName());
+          foreach(array_keys($list) as $key){
+            $name = $list[$key];
+            $names .= $name . ", ";
+          }
+
           $s->sendMessage("§3IgnoredPlayers: §7$names");
         break;
 
@@ -95,14 +108,20 @@ class Main extends PluginBase implements Listener {
             return false;
           }
 
-          if(!empty($this->list->get($s->getName()))){
-            if(in_array($player->getName(), $this->list->get($s->getName()))){
-              $s->sendMessage('§cYou are already ignoring ' . $player->getName());
-              return false;
-            }
+          if(empty($this->list->get($s->getName()))){
+            $list[] = $player->getName();
+            $this->list->set($s->getName(), $list);
+            $this->list->save();
+            $s->sendMessage('§cYou are now ignoring ' . $player->getName());
+            return false;
           }
 
-          $list = $this->list->get($s->getName(), []);
+          if(in_array($player->getName(), $this->list->get($s->getName()))){
+            $s->sendMessage('§cYou are already ignoring ' . $player->getName());
+            return false;
+          }
+
+          $list = $this->list->get($s->getName());
           $list[] = $player->getName();
           $this->list->set($s->getName(), $list);
           $this->list->save();
@@ -132,12 +151,16 @@ class Main extends PluginBase implements Listener {
             return false;
           }
 
-          $list = $this->list->get($s->getName(), []);
+          $list = $this->list->get($s->getName());
           $key = array_search($player->getName(), $list);
-          unset($list[$key]);
+          array_splice($list, $key, 1);
           $this->list->set($s->getName(), $list);
           $this->list->save();
-          $s->sendMessage('§cYou are no longer ignoring ' . $player->getName());
+          $s->sendMessage('§cYou are not longer ignoring ' . $player->getName());
+        break;
+
+        default:
+          $s->sendMessage('§cInvalid argument given. Do /ignore help for more information');
         break;
       }
     }
