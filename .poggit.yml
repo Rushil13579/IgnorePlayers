@@ -5,5 +5,5 @@ branches:
 projects:
   IgnorePlayers:
     path: ""
-    icon: Ignore.png
+    icon: IgnorePlayers.png
 ...
