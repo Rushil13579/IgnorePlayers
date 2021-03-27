@@ -15,4 +15,4 @@ Commands | Aliases | Description
 
 ## Credits
 - @Rushil13579
-- @WolfDen133
+- @WolfDen133 [Requester]
