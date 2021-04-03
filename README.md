@@ -1,5 +1,5 @@
 # IgnorePlayers
-A plugin for PocketMine 3.0.0 and above which allows players to ignore messages from other players
+A plugin for PocketMine 3.0.0 and above which allows players to ignore messages from other players!
 
 - If you have any suggestions/ideas/questions feel free to contact me on discord at **Rushil#2326**
 - If you find any bugs you can report them [here](https://github.com/Rushil13579/IgnorePlayers/issues)
