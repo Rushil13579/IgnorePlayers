@@ -126,7 +126,7 @@ class Ignore extends Command implements PluginIdentifiableCommand {
         }
     }
 
-    public function getMain() : Main {
+    public function getPlugin() : Plugin {
         return $this->main;
     }
 }
