@@ -9,7 +9,8 @@ use pocketmine\{
 
 use pocketmine\command\{
     Command,
-    CommandSender
+    CommandSender,
+    PluginIdentifiableCommand
 };
 
 use Rushil13579\IgnorePlayer\Main;

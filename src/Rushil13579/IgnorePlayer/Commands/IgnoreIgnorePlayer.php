@@ -4,7 +4,7 @@ namespace Rushil13579\IgnorePlayer\Commands;
 
 use pocketmine\{Server, Player};
 
-use pocketmine\command\{Command, CommandSender};
+use pocketmine\command\{Command, CommandSender, PluginIdentifiableCommand};
 
 use Rushil13579\IgnorePlayer\Main;
 
