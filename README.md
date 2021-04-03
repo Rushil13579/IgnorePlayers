@@ -13,6 +13,8 @@ Commands | Aliases | Description
 /ignore add | [/ig add] | Add a player to the ignored list
 /ignore remove | [/ig remove] | Remove a player from the ignored list
 
+- Prevents private messages from ignored players!
+
 ## Credits
 - @Rushil13579
 - @WolfDen133
