@@ -25,7 +25,6 @@ class Main extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
 
         $this->saveDefaultConfig();
-        $this->getResource('config.yml');
 
         $this->cfg = $this->getConfig();
         $this->list = new Config($this->getDataFolder() . "Ignorelist.yml", Config::YAML);
