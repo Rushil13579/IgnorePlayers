@@ -15,7 +15,7 @@ use pocketmine\command\{
 
 use Rushil13579\IgnorePlayer\Main;
 
-class TellIgnorePlayer extends Command implements PluginIdentifiabeCommand {
+class TellIgnorePlayer extends Command implements PluginIdentifiableCommand {
 
     /** @var Main */
     private $main;

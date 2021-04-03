@@ -8,7 +8,7 @@ use pocketmine\command\{Command, CommandSender, PluginIdentifiableCommand};
 
 use Rushil13579\IgnorePlayer\Main;
 
-class IgnoreIgnorePlayer extends Command implements PluginIdentifiabeCommand {
+class IgnoreIgnorePlayer extends Command implements PluginIdentifiableCommand {
 
     /** @var Main */
     private $main;
