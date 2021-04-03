@@ -12,8 +12,8 @@ use pocketmine\event\player\{PlayerJoinEvent, PlayerChatEvent};
 use pocketmine\utils\Config;
 
 use Rushil13579\IgnorePlayer\Commands\{
-    TellCommand,
-    IgnoreCommand
+    TellIgnorePlayer,
+    IgnoreIgnorePlayer
 };
 
 class Main extends PluginBase implements Listener {
@@ -37,7 +37,7 @@ class Main extends PluginBase implements Listener {
 
     public function versionCheck(){
         if($this->cfg->get('version') != '1.1.0'){
-            $this->getLogger()->warning('§cThe configuration file for IgnorePlayers is outdated! Please delete it and restart your server to install the latest version');
+            $this->getLogger()->warning('§cThe configuration file for IgnorePlayer is outdated! Please delete it and restart your server to install the latest version');
             $this->getServer()->getPluginManager()->registerEvents($this, $this);
         }
     }
@@ -49,8 +49,8 @@ class Main extends PluginBase implements Listener {
 
     public function registerCommands(){
         $cmdMap = $this->getServer()->getCommandMap();
-        $cmdMap->register('tell', new TellCommand($this));
-        $cmdMap->register('ignore', new IgnoreCommand($this));
+        $cmdMap->register('IgnorePlayer', new TellIgnorePlayer($this));
+        $cmdMap->register('IgnorePlayer', new IgnoreIgnorePlayer($this));
     }
 
     public function onJoin(PlayerJoinEvent $e){
