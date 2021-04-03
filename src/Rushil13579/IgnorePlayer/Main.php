@@ -12,8 +12,8 @@ use pocketmine\event\player\{PlayerJoinEvent, PlayerChatEvent};
 use pocketmine\utils\Config;
 
 use Rushil13579\IgnorePlayer\Commands\{
-    TellIgnorePlayer,
-    IgnoreIgnorePlayer
+    Tell,
+    Ignore
 };
 
 class Main extends PluginBase implements Listener {
@@ -49,8 +49,8 @@ class Main extends PluginBase implements Listener {
 
     public function registerCommands(){
         $cmdMap = $this->getServer()->getCommandMap();
-        $cmdMap->register('IgnorePlayer', new TellIgnorePlayer($this));
-        $cmdMap->register('IgnorePlayer', new IgnoreIgnorePlayer($this));
+        $cmdMap->register('IgnorePlayer', new Tell($this));
+        $cmdMap->register('IgnorePlayer', new Ignore($this));
     }
 
     public function onJoin(PlayerJoinEvent $e){
@@ -83,9 +83,5 @@ class Main extends PluginBase implements Listener {
             }
         }
         $e->setRecipients($rec);
-    }
-
-    public function onDisable(){
-        $this->unregisterCommands();
     }
 }
