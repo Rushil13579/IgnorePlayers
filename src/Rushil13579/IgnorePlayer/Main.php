@@ -84,4 +84,8 @@ class Main extends PluginBase implements Listener {
         }
         $e->setRecipients($rec);
     }
+
+    public function onDisable(){
+        $this->unregisterCommands();
+    }
 }
