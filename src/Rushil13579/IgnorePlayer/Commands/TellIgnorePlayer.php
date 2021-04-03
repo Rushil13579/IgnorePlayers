@@ -66,7 +66,7 @@ class TellIgnorePlayer extends Command implements PluginIdentifiableCommand {
 		}
     }
 
-    public function getPlugin(){
+    public function getPlugin() : Main {
         return $this->main;
     }
 }
