@@ -65,7 +65,7 @@ class Tell extends Command implements PluginIdentifiableCommand {
 		}
     }
 
-    public function getPlugin() : Plugin {
+    public function getMain() : Main {
         return $this->main;
     }
 }
