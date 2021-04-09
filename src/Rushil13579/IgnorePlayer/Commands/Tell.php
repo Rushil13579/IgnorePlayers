@@ -4,6 +4,8 @@ namespace Rushil13579\IgnorePlayer\Commands;
 
 use pocketmine\{Server, Player};
 
+use pocketmine\plugin\Plugin;
+
 use pocketmine\command\{Command, CommandSender, PluginIdentifiableCommand};
 
 use Rushil13579\IgnorePlayer\Main;
@@ -58,7 +60,8 @@ class Tell extends Command implements PluginIdentifiableCommand {
 		}
     }
 
-    public function getPlugin() : Plugin {
+    public function getPlugin() : Plugin 
+    {
         return $this->main;
     }
 }
