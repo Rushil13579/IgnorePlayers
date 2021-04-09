@@ -2,7 +2,9 @@
 
 namespace Rushil13579\IgnorePlayer\Commands;
 
-use pocketmine\{Server, Player, Plugin};
+use pocketmine\{Server, Player};
+
+use pocketmine\plugin\Plugin;
 
 use pocketmine\command\{Command, CommandSender, PluginIdentifiableCommand};
 
@@ -126,7 +128,7 @@ class Ignore extends Command implements PluginIdentifiableCommand {
         }
     }
 
-    public function getMain() : Main {
+    public function getPlugin() : Plugin {
         return $this->main;
     }
 }
